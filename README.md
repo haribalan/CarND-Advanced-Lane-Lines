@@ -29,9 +29,8 @@ The steps of this project are the following:
 The entire project has been coded on the Jupyter notebook, [advanced_lane_finding.ipynb](./advanced_lane_finding.ipynb)
 Each section is marked with the functionality they perform. 
 
-###Camera Calibration
-
-##### Cameras might create distorted images, say objects near the edges can streched or skewed. This can be due to various reasons such as lens issues. It is important to correct these image distortion, as it can change the apparent size, shape or appearance of an object in an image. Undistorting these images are key for lane finding or any other computer vision based work. Technique used on this project for undistrotion involved learning the distrotion matrix and co-effcients using 15+ chessboard images and open source CV2 library methods. Code is listed in the jupyter nodebook under camera calibration section.
+###Camera Calibration and Distortion correction
+Cameras might create distorted images, say objects near the edges can streched or skewed. This can be due to various reasons such as lens issues. It is important to correct these image distortion, as it can change the apparent size, shape or appearance of an object in an image. Undistorting these images are key for lane finding or any other computer vision based work. Technique used on this project for undistrotion involved learning the distrotion matrix and co-effcients using 15+ chessboard images and open source CV2 library methods. Code is listed in the jupyter nodebook under camera calibration section.
 
 Here is an example distorted image and the undistorted image eqiualent created by the Camerca Calibration program:
 [image1]
@@ -41,70 +40,27 @@ I start by preparing "object points", which will be the (x, y, z) coordinates of
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
+###Thresholding (Color Transforms and Gradients)
+In this step I converted undistorted image to different color spaces and create binary thresholded images which highlight only the lane lines and ignore everything else. I found that S-Channel combined with Sobel X provided a good lane lines identification. This technique worked well with Yellow and white colored lanes. For S-Channel Min and Max thresholded used where 170 and 255 respectively and for Sobel X it was 20, 100 respectively.
+[image2]
 
-![alt text][image1]
+###The Birds-eye view
+The birds-eye view or the Perspective transform to rectify binary image was the next step.
+Two key methos from CV2 library was used to achieve this. 
+First method _getPerspectiveTransform_ that takes the source points and distination points. For source points trapezoid like shape on the binary image taken and rectangle shaped co-ordinates for the distination points. This methos outputs the transform matrix that is passed into the second method _warpPerspective_ which takes the original image and performs the actual transform. I have used the INTER_LINEAR interpolation for the warp. I also computed the Inverse perspective transform which will later be used the orignal image.
+[image3]
 
-###Pipeline (single images)
+###Detect lane pixels and fit lane boundary
+Transformed binary image now has the lane pixels highlighted, however, there are still other pixels and noise on the image and also we need a find the lane automatically. To achieve this a sliding histogram was computed to detect clusters of marked pixels. The highest peak of each histogram represent the lanes and space inbetween is the width/inside the lane.   This method holds the discussed implementation _find_lanes_by_histogram_slide_window_ 
 
-####1. Provide an example of a distortion-corrected image.
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![alt text][image2]
-####2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+With pixels assigned to each lane, a second order polynomials can be fitted. f(y)=Ay^2+By+C . Once the lines has been fitted the next  frames of video just search in a margin around the previous line position, using the method _extract_lane_next_ .
+These polynomials were also used to calculate the curvature of the lane. The distance from center was converted from pixels to meters by multiplying the number of pixels by 3.7/700.
 
-![alt text][image3]
+[image4]
+[image5]
 
-####3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
-
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
-
-```
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
-
-```
-This resulted in the following source and destination points:
-
-| Source        | Destination   | 
-|:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
-
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
-
-![alt text][image4]
-
-####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
-
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
-
-![alt text][image5]
-
-####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
-
-I did this in lines # through # in my code in `my_other_file.py`
-
-####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
-
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
-
-![alt text][image6]
-
----
-
-###Pipeline (video)
-
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+###Putting all together
+Final step includes warpping the detected lane boundaries back onto the original image. The 'Inverse perspective transform' computed earlier is used to warp back to orignial image.  I have used the moviepy's VideoFileClip library to call the pipeline on every frame to detect lanes and overlay the detected lanes on top of the original image/video.
 
 Here's a [link to my video result](./project_video.mp4)
 
