@@ -39,12 +39,12 @@ In this step I converted undistorted image to different color spaces and create 
 ###The Birds-eye view
 The birds-eye view or the Perspective transform to rectify binary image was the next step.
 Two key methos from CV2 library was used to achieve this. 
-First method _getPerspectiveTransform_ that takes the source points and distination points. For source points trapezoid like shape on the binary image taken and rectangle shaped co-ordinates for the distination points. This methos outputs the transform matrix that is passed into the second method _warpPerspective_ which takes the original image and performs the actual transform. I have used the INTER_LINEAR interpolation for the warp. I also computed the Inverse perspective transform which will later be used the orignal image.
+First method _getPerspectiveTransform_ that takes the source points and distination points. For source points trapezoid like shape on the binary image was taken and rectangle shaped co-ordinates for the distination points. This method outputs the transform matrix that is passed into the second method _warpPerspective_ which takes the original image and performs the actual transform. I have used the INTER_LINEAR interpolation for the warp. I also computed the Inverse perspective transform which will later be used the orignal image.
 
 ![image3] (./output_images/test5_warp.png "Binary Example")
 
 ###Detect lane pixels and fit lane boundary
-Transformed binary image now has the lane pixels highlighted, however, there are still other pixels and noise on the image and also we need a find the lane automatically. To achieve this a sliding histogram was computed to detect clusters of marked pixels. The highest peak of each histogram represent the lanes and space inbetween is the width/inside the lane.   This method holds the discussed implementation _find_lanes_by_histogram_slide_window_ 
+Transformed binary image now has the lane pixels highlighted, however, there are still other pixels and noise on the image and also we need a find the lane automatically. To achieve this a sliding histogram was computed to detect clusters of marked pixels. The highest peak of each histogram represent the lanes and space inbetween is the width/inside the lane. This method holds the discussed implementation _find_lanes_by_histogram_slide_window_ 
 
 With pixels assigned to each lane, a second order polynomials can be fitted. f(y)=Ay^2+By+C . Once the lines has been fitted the next  frames of video just search in a margin around the previous line position, using the method _extract_lane_next_ .
 These polynomials were also used to calculate the curvature of the lane. The distance from center was converted from pixels to meters by multiplying the number of pixels by 3.7/700.
@@ -58,4 +58,4 @@ Final step includes warpping the detected lane boundaries back onto the original
 
 Here's a [link to my video result](./project_video.mp4)
 
-The above steps and the videos shows the final result for this submission, however I plan to do further work and tuning on this code. Since during debugging and testing this code against the advanced/harder challenge videos, I observed that with intense color variance on the video due to road color, shadow, near by vehicle, lane paint and deeper curvers; the lane detection and fitting struggles. This result can further be improved with fine tuning thresolding, wrapping and lane fitting.
+The above steps and the videos shows the final result for this submission, however I plan to do further work and tuning this code. Since during debugging and testing this code against the advanced/harder challenge videos, I observed that with intense color variance on the video (road color, shadows, near by vehicle, lane paint and deeper curvers), the lane detection and fitting struggles. This result can further be improved with fine tuning thresolding, wrapping and lane fitting.
