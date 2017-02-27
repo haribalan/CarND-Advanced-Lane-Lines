@@ -58,10 +58,4 @@ Final step includes warpping the detected lane boundaries back onto the original
 
 Here's a [link to my video result](./project_video.mp4)
 
----
-
-###Discussion
-
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The above steps and the videos shows the final result for this submission, however I plan to do further work and tuning on this code. Since during debugging and testing this code against the advanced/harder challenge videos, I observed that with intense color variance on the video due to road color, shadow, near by vehicle, lane paint and deeper curvers; the lane detection and fitting struggles. This result can further be improved with fine tuning thresolding, wrapping and lane fitting.
