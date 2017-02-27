@@ -16,7 +16,7 @@ The steps of this project are the following:
 
 ###Project Code
 The entire project has been coded on the Jupyter notebook, [advanced_lane_finding.ipynb](./advanced_lane_finding.ipynb)
-Each section is marked with the functionality they perform. 
+#####Each section is marked with the functionality they perform and those code snippets on jupyter notebook are listed under the same name as here.
 
 ###Camera Calibration and Distortion correction
 Cameras might create distorted images, say objects near the edges can streched or skewed. This can be due to various reasons such as lens issues. It is important to correct these image distortion, as it can change the apparent size, shape or appearance of an object in an image. Undistorting these images are key for lane finding or any other computer vision based work. Technique used on this project for undistrotion involved learning the distrotion matrix and co-effcients using 15+ chessboard images and open source CV2 library methods. Code is listed in the jupyter nodebook under camera calibration section.
@@ -52,7 +52,7 @@ These polynomials were also used to calculate the curvature of the lane. The dis
 ![image4] (./output_images/test5_lanefit1.jpg "Warp Example")
 ![image5] (./output_images/test5_lanefit2.jpg "Fit Visual")
 
-###Putting all together
+###Pipeline - putting it all together
 Final step includes warpping the detected lane boundaries back onto the original image. The 'Inverse perspective transform' computed earlier is used to warp back to orignial image.  I have used the moviepy's VideoFileClip library to call the pipeline on every frame to detect lanes and overlay the detected lanes on top of the original image/video.
 ![image6] (./output_images/test4_final.png "Output")
 
