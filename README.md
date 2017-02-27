@@ -17,13 +17,14 @@ The steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/undistort_output.png "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
-[video1]: ./project_video.mp4 "Video"
+[image1]: ./output_images/1dist_undist.png "Undistorted"
+[image1b]: ./output_images/2dist_undist.png "Undistorted"
+[image2]: ./output_images/test5_thresh.png "Road Transformed"
+[image3]: ./output_images/test5_warp.png "Binary Example"
+[image4]: ./output_images/test5_lanefit1.png "Warp Example"
+[image5]: ./output_images/test5_lanefit2.png "Fit Visual"
+[image6]: ./output_images/test4_final.png "Output"
+[video1]: ./output_video.mp4 "Video"
 
 ###Project Code
 The entire project has been coded on the Jupyter notebook, [advanced_lane_finding.ipynb](./advanced_lane_finding.ipynb)
@@ -34,7 +35,7 @@ Cameras might create distorted images, say objects near the edges can streched o
 
 Here is an example distorted image and the undistorted image eqiualent created by the Camerca Calibration program:
 [image1]
-
+[image1b]
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
