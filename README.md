@@ -56,6 +56,6 @@ These polynomials were also used to calculate the curvature of the lane. The dis
 Final step includes warpping the detected lane boundaries back onto the original image. The 'Inverse perspective transform' computed earlier is used to warp back to orignial image.  I have used the moviepy's VideoFileClip library to call the pipeline on every frame to detect lanes and overlay the detected lanes on top of the original image/video.
 ![image6] (./output_images/test4_final.png "Output")
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./output_video_new.mp4)
 
 The above steps and the videos shows the final result for this submission, however I plan to do further work and tuning this code. Since during debugging and testing this code against the advanced/harder challenge videos, I observed that with intense color variance on the video (road color, shadows, near by vehicle, lane paint and deeper curvers), the lane detection and fitting struggles. This result can further be improved with fine tuning thresolding, wrapping and lane fitting.
