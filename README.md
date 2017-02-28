@@ -54,7 +54,7 @@ These polynomials were also used to calculate the curvature of the lane. The dis
 
 ###Pipeline - putting it all together
 Final step includes warpping the detected lane boundaries back onto the original image. The 'Inverse perspective transform' computed earlier is used to warp back to orignial image.  I have used the moviepy's VideoFileClip library to call the pipeline on every frame to detect lanes and overlay the detected lanes on top of the original image/video.
-![image6] (./output_images/test4_final.png "Output")
+![image6] (./output_images/final_image_grab.PNG "Output")
 
 Here's a [link to my video result](./output_video_new.mp4)
 
