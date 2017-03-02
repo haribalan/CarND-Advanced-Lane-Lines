@@ -57,7 +57,8 @@ Final step includes warpping the detected lane boundaries back onto the original
 ![image6] (./output_images/final_image_grab.PNG "Output")
 
 Here's a [link to my video result](./output_video.mp4)
-Discussion:
+
+##### Discussion:
 
 The first few iteration were tough i.e. image overlay was all over the place and jittery. I applied techniques to improve the binary image including undistrotion, perspective tranformation on images and then subjected them to channel filters and gradients, to get better line detection/fitting. This was a process that too longer time to understand and get result as desired. To expedite the development process I cut two smaller videos mainly near the shadow and bridge area for testing. Thresolding if too low results in lots of noise on the image and too high results in information lose. The balance needed to be found. Camera calibration part was easier and woked as expected, thanks to the test chessboard images. Line fitting improved and became better with improved images from the image processing. I have employed sliding window technique for the first round and after which used the fitted model on the future frames. To avoid too much jitter and erroneous lane detection, I have used technique to check if parameter is in accceptable range, if not then replace it with avg. taken over a period of 5-10 frames. This reduces Jittering and unresonable lane displaces and acts as an sanity check.
 
