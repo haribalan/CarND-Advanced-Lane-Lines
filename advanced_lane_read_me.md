@@ -6,21 +6,19 @@ Using sliding window technique, I extracted imaged patches from the frames. Thes
 
 ### Main Code:
 
-### The code for this project is in the &quot;vehicle\_detection\_training.ipynb&quot;
+##### The code for this project is in the &quot;vehicle\_detection\_training.ipynb&quot;
 
 ##### Each section is marked with the functionality they perform and those code snippets on jupyter notebook are listed under the same name as here.
 
 ### Data set exploratory Images
 
-### For this project, I was provided with a labeled dataset of vehicle and non-vehicle examples to train my classifier. These example images come from a combination of the GTI vehicle image database, the KITTI vision benchmark suite, and examples extracted from the project video itself. There set was almost evenly balanced between cars and non-cars. The images were provided as .png files.
+For this project, I was provided with a labeled dataset of vehicle and non-vehicle examples to train my classifier. These example images come from a combination of the GTI vehicle image database, the KITTI vision benchmark suite, and examples extracted from the project video itself. There set was almost evenly balanced between cars and non-cars. The images were provided as .png files.
 
-### Total number of images labeled as Cars: 8792
+Total number of images labeled as Cars: 8792
 
-### Total number of images labeled as Non-Cars: 8968
+Total number of images labeled as Non-Cars: 8968
 
-### Here are some sample images:
-
-###
+Here are some sample images:
 
 ![alt text](output_images/datasetsample.png "Data Set Samples")
 
@@ -48,13 +46,13 @@ Following image shows the locations of the search windows used by our detection 
 
 For the HOG feature extraction I started trying out RGB, Gray, HLS color spaces to get better gradients and finally got better results with YCrCb and LUV was also better. I also played by visualizing images with different HOG params settings namely the orienatations, pixels per cell and the cell per blocks. Code block &quot;Training and Tweaks&quot; has the parameter values for HOG and implementation can be found &quot; Feature Extractions and Sliding window&quot;
 
-### orient = 9  # HOG orientations
+orient = 9  # HOG orientations
 
-### pix\_per\_cell = 8 # HOG pixels per cell
+pix\_per\_cell = 8 # HOG pixels per cell
 
-### cell\_per\_block = 2 # HOG cells per block
+cell\_per\_block = 2 # HOG cells per block
 
-### hog\_channel = &#39;ALL&#39; # Can be 0, 1, 2, or &quot;ALL&quot;
+hog\_channel = &#39;ALL&#39; # Can be 0, 1, 2, or &quot;ALL&quot;
 
 ![alt text](output_images/hog_images.png "Hog data Samples")
 
@@ -100,10 +98,15 @@ Using a threshold value the hot parts are detect as cars and rest ignored. On th
 
 This is a great project to understand and explore vehicle detection using computer vision and machine learning. HOG feature and reference videos were very advanced methods that will come in handy for mu future works and projects. Some of the challenges on project was finding the right window sizing, color transformation selection, heatmap thresholding. It took serveral rounds of trail and adjustments to get to a resonable output and detection. I also observed that Hog feature is very powerful with right amount parameters tuning, it by itself can provide great detection and tracking. 
 
-However, some of the improvements that needs to go into this include increase in performance and more work on thresholding to get smoother and robust detection. I plan to improve this model to detect and track better 
+However, some of the improvements that needs to go into this include increase in performance and more work on thresholding to get smoother and robust detection. I plan to improve this model to detect and track better:
+
       - increase traning set, augmenting the images with shear, transformations, etc. 
+
       - harder false positives weeding
+      
       - try other machine larning models and also deep learning (NN)
+      
       - work more on feature selection tuning.
- Once the above plan is acheived try this one challenge videos provided by udacity for advanced lane finding projects. It will also be interesting to train this model to work on city streets where the objects are more than just vehicles such as people, bikes, signs etc.
+
+Once the above plan is acheived try this one challenge videos provided by udacity for advanced lane finding projects. It will also be interesting to train this model to work on city streets where the objects are more than just vehicles such as people, bikes, signs etc.
  
