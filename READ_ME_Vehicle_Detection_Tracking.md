@@ -6,7 +6,7 @@ Using sliding window technique, I extracted imaged patches from the frames. Thes
 
 ### Main Code and Output:
 
-##### The code for this project is in the &quot;vehicle\_detection\_training.ipynb&quot;
+##### The code for this project is in the [vehicle_detection_training.ipynb](./vehicle_detection_training.ipynb)
 ##### Output Video:  [link to my video result](./vehicle_detection.mp4)
 ##### Each section is marked with the functionality they perform and those code snippets on jupyter notebook are listed under the same name as here.
 
