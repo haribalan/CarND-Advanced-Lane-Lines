@@ -41,6 +41,10 @@ Following image shows the locations of the search windows used by our detection 
 
 ![alt text](output_images/windowsearch.png "Window Search")
 
+Sample:
+
+![alt text](output_images/grid.png "Grid Window Search")
+
 
 ### **Feature Extraction**
 
