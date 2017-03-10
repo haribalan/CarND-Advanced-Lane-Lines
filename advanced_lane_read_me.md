@@ -4,10 +4,10 @@ The goals project is to detect vehicles on a video frame using computer vision a
 
 Using sliding window technique, I extracted imaged patches from the frames. These windows were then passed for feature extraction. The generated features were used as the input for the LinearSVC model. The output of the SVM model indicates whether the given window is a vehicle or not. The result was further processed by removing duplicate detections and false positives, bounding boxes were drawn to indicate vehicles.
 
-### Main Code:
+### Main Code and Output:
 
 ##### The code for this project is in the &quot;vehicle\_detection\_training.ipynb&quot;
-
+##### Output Video:  [link to my video result](./vehicle_detection.mp4)
 ##### Each section is marked with the functionality they perform and those code snippets on jupyter notebook are listed under the same name as here.
 
 ### Data set exploratory Images
@@ -99,14 +99,15 @@ Using a threshold value the hot parts are detect as cars and rest ignored. On th
 This is a great project to understand and explore vehicle detection using computer vision and machine learning. HOG feature and reference videos were very advanced methods that will come in handy for mu future works and projects. Some of the challenges on project was finding the right window sizing, color transformation selection, heatmap thresholding. It took serveral rounds of trail and adjustments to get to a resonable output and detection. I also observed that Hog feature is very powerful with right amount parameters tuning, it by itself can provide great detection and tracking. 
 
 However, some of the improvements that needs to go into this include increase in performance and more work on thresholding to get smoother and robust detection. I plan to improve this model to detect and track better:
+      increase traning set, augmenting the images with shear, transformations, etc. 
 
-      - increase traning set, augmenting the images with shear, transformations, etc. 
-
-      - harder false positives weeding
+      harder false positives weeding
       
-      - try other machine larning models and also deep learning (NN)
+      try other machine larning models and also deep learning (NN)
       
-      - work more on feature selection tuning.
+      work more on feature selection tuning.
 
 Once the above plan is acheived try this one challenge videos provided by udacity for advanced lane finding projects. It will also be interesting to train this model to work on city streets where the objects are more than just vehicles such as people, bikes, signs etc.
- 
+
+##### Output Video:  [link to my video result](./vehicle_detection.mp4)
+
